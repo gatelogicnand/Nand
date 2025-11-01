@@ -3,53 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>Dashboard</title>
     <style>
+        /* == Reset & Pengaturan Dasar == */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            padding: 30px;
-            background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6; /* Warna latar belakang profesional yang lembut */
+            color: #333;
+            line-height: 1.6;
         }
-        h1 {
-            text-align: center;
+
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        button {
-            color: blueviolet;
-            background-color: #c9d6ff;
-            padding: 5px 15px;
-            border-radius: 5px;
-            font-size: 1rem;
+
+        /* == Header Aplikasi == */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 30px;
+        }
+
+        .app-header h1 {
+            font-size: 1.8rem;
+            color: #2c3e50; /* Biru tua */
+        }
+
+        /* == Tombol Logout == */
+        .logout-btn { /* Ini adalah tombol dengan id="logout" */
+            font-size: 0.9rem;
             font-weight: bold;
+            color: #fff;
+            background-color: #e74c3c; /* Merah profesional untuk 'logout' */
             border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        button:hover {
-            text-decoration: underline;
-            color: blue;
+
+        .logout-btn:hover {
+            background-color: #c0392b; /* Merah lebih gelap saat hover */
+            text-decoration: none; /* Menghilangkan underline dari style lama */
         }
-        button, div {
-            margin-left: 15%;
-            font-size: 20px;
-            padding: 10px;
+
+        /* == Layout Konten == */
+        .content-grid {
+            display: grid;
+            /* Kolom profil lebih kecil, kolom info lebih besar */
+            grid-template-columns: 1fr 2fr; 
+            gap: 30px;
         }
-        div {
-            font-weight: 400;
-            color: rgb(12,11,11);
+
+        /* == Gaya "Card" yang Profesional == */
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Bayangan lembut */
         }
-        span {
-            font-weight: 600;
-            font-size: 22px;
-            color: black;
+
+        .card h2 {
+            font-size: 1.4rem;
+            color: #34495e; /* Biru abu-abu */
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .card p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        /* == Card Profil Pengguna == */
+        .profile-details {
+            list-style: none; /* Menghilangkan bullet points */
+        }
+
+        .profile-details li {
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .profile-details strong {
+            display: block; /* Label (First Name, dll) di atas datanya */
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        /* Ini adalah <span> yang diisi oleh JavaScript */
+        .profile-details span { 
+            font-size: 1.1rem;
+            color: #000;
+            font-weight: 500;
+        }
+
+        /* == Card Info Sejarah Cloud == */
+        .info-card strong {
+            color: #2980b9; /* Aksen biru untuk poin penting */
+        }
+
+        /* == Desain Responsif untuk HP == */
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr; /* Buat card bertumpuk di HP */
+            }
+            
+            .app-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to the Homepage</h1>
-    <div>First Name: <span id="loggedUserFName"></span></div>
-    <div>Last Name: <span id="loggedUserLName"></span></div>
-    <div>Email: <span id="loggedUserEmail"></span></div>
-    <button id="logout">Logout</button>
+    
+    <div class="app-container">
+        <header class="app-header">
+            <h1>My Dashboard</h1>
+            <button id="logout" class="logout-btn">Logout</button>
+        </header>
 
-    <!-- ✅ Script dipanggil di akhir agar tombol sudah siap -->
+        <main class="content-grid">
+            
+            <section class="card profile-card">
+                <h2>Welcome, <span id="loggedUserFName"></span>!</h2>
+                <p>Your account details:</p>
+                <ul class="profile-details">
+                    <li>
+                        <strong>Last Name:</strong>
+                        <span id="loggedUserLName"></span>
+                    </li>
+                    <li>
+                        <strong>Email:</strong>
+                        <span id="loggedUserEmail"></span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="card info-card">
+                <h2>A Brief History of Cloud Computing</h2>
+                <p>Konsep *cloud computing* (komputasi awan) sebenarnya sudah ada sejak tahun 1960-an melalui karya J.C.R. Licklider tentang "Intergalactic Computer Network". Namun, cloud modern baru benar-benar terbentuk pada akhir 1990-an.</p>
+                <p><strong>1999:</strong> Salesforce.com memelopori konsep pengiriman aplikasi perusahaan melalui situs web sederhana (Software-as-a-Service, atau SaaS).</p>
+                <p><strong>2006:</strong> Ini adalah tahun penting. Amazon meluncurkan Amazon Web Services (AWS), dimulai dengan Simple Storage Service (S3) dan Elastic Compute Cloud (EC2). Ini mengkomersialkan Infrastructure-as-a-Service (IaaS), yang memungkinkan siapa saja menyewa daya komputasi dan penyimpanan, mengubah cara bisnis dibangun secara fundamental.</p>
+                <p><strong>2008:</strong> Google merilis Google App Engine, sebuah Platform-as-a-Service (PaaS), yang lebih jauh mengabstraksi infrastruktur dasar bagi para pengembang.</p>
+                <p>Saat ini, komputasi awan (didominasi oleh penyedia seperti AWS, Microsoft Azure, dan Google Cloud) telah menjadi standar untuk membangun dan menerapkan aplikasi, menawarkan skala global, fleksibilitas, dan model bayar-sesuai-pemakaian (*pay-as-you-go*).</p>
+            </section>
+
+        </main>
+    </div>
+
     <script type="module" src="./homepage.js"></script>
 </body>
 </html>
