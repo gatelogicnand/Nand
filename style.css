@@ -8,13 +8,26 @@
 
 /* Latar Belakang Body yang Lebih Halus */
 body{
-    /* Gradien baru yang lebih profesional */
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    /* * PERUBAHAN UTAMA ADA DI SINI:
+     * 1. Layer pertama adalah gradien lama Anda, tapi dibuat semi-transparan
+     * (menggunakan rgba dengan nilai '0.85' untuk transparansi).
+     * 2. Layer kedua adalah URL gambar pemandangan alam.
+     */
+    background: linear-gradient(135deg, rgba(245, 247, 250, 0.85), rgba(195, 207, 226, 0.85)),
+                url('https://source.unsplash.com/1600x900/?nature,landscape,mountain');
+    
+    /* Properti ini memastikan gambar latar menutupi layar dengan baik */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Membuat background diam saat di-scroll */
+
+    /* Properti ini sudah ada dari sebelumnya (penting untuk layout) */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px 0; /* Tambahkan padding untuk tampilan mobile */
+    padding: 20px 0;
 }
 
 /* Kontainer Form yang Ditingkatkan */
