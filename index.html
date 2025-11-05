@@ -1,249 +1,85 @@
-<!doctype html>
-<html lang="id">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Login — Fresh & Aesthetic</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* Reset dan Font Global */
-    *{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}
-    html,body{height:100%}
-
-    /* Latar Belakang yang Dinamis (SVG + Gradien) */
-    body{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background: linear-gradient(160deg,#e9f0ff 0%, #f7fbff 35%, #eaf7f0 100%);
-      overflow:hidden;
-      padding:40px 20px;
-    }
-
-    /* Container untuk scenery (full-bleed) */
-    .scenery{
-      position:fixed;
-      inset:0; /* cover all */
-      z-index:0;
-      pointer-events:none;
-    }
-
-    /* Soft overlay to keep contrast */
-    .bg-overlay{
-      position:fixed;inset:0;background:linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.55));backdrop-filter: blur(2px);z-index:0;pointer-events:none;
-    }
-
-    /* Glass card (login) */
-    .container{
-      position:relative;
-      width:450px;max-width:96%;
-      z-index:2;
-      background: rgba(255,255,255,0.75);
-      border-radius:14px;
-      padding:2.25rem;
-      box-shadow: 0 12px 40px rgba(20,30,60,0.12);
-      border: 1px solid rgba(255,255,255,0.6);
-      backdrop-filter: blur(8px);
-      overflow:hidden;
-    }
-
-    form{margin:0}
-
-    .form-title{font-size:1.6rem;font-weight:700;color:#21304b;text-align:center;margin-bottom:1rem}
-    .form-sub{font-size:0.95rem;color:#51627a;text-align:center;margin-bottom:1.25rem}
-
-    /* Input groups */
-    .input-group{position:relative;margin-bottom:1.25rem}
-    input{width:100%;padding:14px 14px 14px 46px;border:none;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(245,249,255,0.8));font-size:15px;color:#21304b;box-shadow:0 6px 18px rgba(34,50,90,0.05);height:48px}
-    input::placeholder{color:#9aa6bb}
-    .input-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:26px;height:26px;opacity:0.95}
-
-    /* Focus style */
-    input:focus{outline:none;box-shadow:0 8px 20px rgba(74,105,226,0.12);transform:translateY(-1px)}
-
-    /* Recover */
-    .recover{font-size:0.9rem;text-align:right;color:#3356d1;margin-bottom:0.75rem}
-    .recover a{color:inherit;text-decoration:none}
-    .recover a:hover{text-decoration:underline}
-
-    /* Button */
-    .btn{width:100%;padding:12px;border-radius:10px;border:none;background:linear-gradient(90deg,#4A69E2,#2E5BD8);color:#fff;font-weight:600;font-size:1rem;cursor:pointer;box-shadow:0 10px 30px rgba(46,91,216,0.16);transition:transform .18s ease, box-shadow .18s ease}
-    .btn:hover{transform:translateY(-3px);box-shadow:0 18px 36px rgba(46,91,216,0.18)}
-
-    .or{margin:14px 0;color:#8f9cb0;text-align:center;font-weight:600}
-
-    /* Social icons (simple circles) */
-    .icons{text-align:center;margin-bottom:.6rem}
-    .icons button{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:none;background:transparent;margin:0 8px;cursor:pointer;box-shadow:0 6px 18px rgba(34,50,90,0.04)}
-    .icons svg{width:18px;height:18px}
-
-    .links{display:flex;justify-content:center;gap:10px;margin-top:12px;font-size:0.95rem;color:#21304b}
-    .links button{background:transparent;border:none;color:#3356d1;font-weight:600;cursor:pointer}
-
-    /* Tiny note */
-    .note{font-size:0.85rem;color:#7b8899;text-align:center;margin-top:10px}
-
-    /* Responsive */
-    @media (max-width:420px){.container{padding:1.25rem}.form-title{font-size:1.35rem}}
-
-    /* ----------------- Animated SVG elements ----------------- */
-    /* Cloud movement */
-    @keyframes cloudMove{from{transform:translateX(-10%)}to{transform:translateX(110%)}}
-    .cloud{animation:cloudMove linear infinite}
-    .cloud.slow{animation-duration:60s}
-    .cloud.med{animation-duration:45s}
-    .cloud.fast{animation-duration:30s}
-
-    /* Sun gentle bob */
-    @keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
-    .sun{animation:bob 6s ease-in-out infinite}
-
-    /* Parallax for mountains */
-    @keyframes floatX{0%{transform:translateX(0)}50%{transform:translateX(-6px)}100%{transform:translateX(0)}}
-    .mountain.near{animation:floatX 8s ease-in-out infinite}
-    .mountain.far{animation:floatX 14s ease-in-out infinite}
-
-    /* subtle shimmer for water */
-    @keyframes shimmer{0%{opacity:.85}50%{opacity:1}100%{opacity:.85}}
-    .lake{animation:shimmer 5s ease-in-out infinite}
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register & Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="firebaseauth.js"></script>
 </head>
 <body>
-
-  <!-- Animated scenery (SVG) -->
-  <div class="scenery" aria-hidden="true">
-    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" style="width:100%;height:100%;display:block">
-      <defs>
-        <linearGradient id="skyGrad" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stop-color="#f9fbff"/>
-          <stop offset="60%" stop-color="#e9f7f4"/>
-          <stop offset="100%" stop-color="#eaf2ff"/>
-        </linearGradient>
-        <linearGradient id="mountNear" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stop-color="#7aa7d9"/>
-          <stop offset="100%" stop-color="#4b6f9c"/>
-        </linearGradient>
-        <linearGradient id="mountFar" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stop-color="#cfe6ff"/>
-          <stop offset="100%" stop-color="#9cbfe6"/>
-        </linearGradient>
-      </defs>
-
-      <!-- sky rect for consistent background -->
-      <rect width="100%" height="100%" fill="url(#skyGrad)"></rect>
-
-      <!-- sun -->
-      <g transform="translate(1150,140)" class="sun" style="mix-blend-mode:screen">
-        <circle r="40" fill="#FFD166" opacity="0.95"></circle>
-        <circle r="70" fill="#FFD166" opacity="0.08"></circle>
-      </g>
-
-      <!-- clouds (grouped, different speeds) -->
-      <g transform="translate(-200,70)" class="cloud slow" style="opacity:0.95">
-        <g transform="scale(1.2)">
-          <ellipse cx="200" cy="60" rx="70" ry="32" fill="#ffffff"></ellipse>
-          <ellipse cx="240" cy="60" rx="50" ry="28" fill="#ffffff"></ellipse>
-          <ellipse cx="170" cy="60" rx="50" ry="28" fill="#ffffff"></ellipse>
-        </g>
-      </g>
-
-      <g transform="translate(-400,20)" class="cloud med" style="opacity:0.9">
-        <g transform="scale(0.9)">
-          <ellipse cx="200" cy="60" rx="85" ry="36" fill="#ffffff"></ellipse>
-          <ellipse cx="250" cy="60" rx="55" ry="30" fill="#ffffff"></ellipse>
-          <ellipse cx="160" cy="60" rx="55" ry="30" fill="#ffffff"></ellipse>
-        </g>
-      </g>
-
-      <g transform="translate(-600,140)" class="cloud fast" style="opacity:0.9">
-        <g transform="scale(0.8)">
-          <ellipse cx="200" cy="60" rx="60" ry="28" fill="#ffffff"></ellipse>
-          <ellipse cx="235" cy="60" rx="42" ry="24" fill="#ffffff"></ellipse>
-          <ellipse cx="170" cy="60" rx="42" ry="24" fill="#ffffff"></ellipse>
-        </g>
-      </g>
-
-      <!-- far mountain -->
-      <g transform="translate(0,420) scale(1)" class="mountain far" style="opacity:0.95">
-        <path d="M0 260 L120 120 L240 260 L360 160 L480 280 L600 140 L720 260 L840 120 L960 280 L1080 150 L1200 300 L1440 220 L1440 900 L0 900 Z" fill="url(#mountFar)"></path>
-      </g>
-
-      <!-- near mountain -->
-      <g transform="translate(0,480) scale(1)" class="mountain near">
-        <path d="M0 260 L160 90 L320 260 L480 100 L640 260 L800 90 L960 260 L1120 120 L1280 260 L1440 80 L1440 900 L0 900 Z" fill="url(#mountNear)"></path>
-      </g>
-
-      <!-- lake / foreground shimmer -->
-      <g transform="translate(0,640)" class="lake" opacity="0.95">
-        <rect x="0" y="0" width="1440" height="260" fill="rgba(255,255,255,0.02)"></rect>
-        <ellipse cx="720" cy="50" rx="680" ry="80" fill="rgba(255,255,255,0.03)"></ellipse>
-      </g>
-
-    </svg>
-  </div>
-  <div class="bg-overlay"></div>
-
-  <!-- Login Card -->
-  <section class="container" aria-label="Login form">
-    <div class="form-title">Selamat Datang</div>
-    <div class="form-sub">Masuk untuk melanjutkan ke akun Anda</div>
-
-    <form>
-
-      <div class="input-group">
-        <svg class="input-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5z" stroke="#4A69E2" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <input id="email" type="email" placeholder="" required />
-        <label for="email">Email atau Username</label>
+    <div class="container" id="signup" style="display:none;">
+      <h1 class="form-title">Register</h1>
+      <form method="post" action="">
+        <div id="signUpMessage" class="messageDiv" style="display:none;"></div>
+        <div class="input-group">
+           <i class="fas fa-user"></i>
+           <input type="text"  id="fName" placeholder="First Name" required>
+           <label for="fname">First Name</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text"  id="lName" placeholder="Last Name" required>
+            <label for="lName">Last Name</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email"  id="rEmail" placeholder="Email" required>
+            <label for="rEmail">Email</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="rPassword"  placeholder="Password" required>
+            <label for="rPassword">Password</label>
+        </div>
+       <button class="btn" id="submitSignUp" >Sign Up</button>
+      </form>
+      <p class="or">
+        ----------or--------
+      </p>
+      <div class="icons">
+        <i class="fab fa-google"></i>
+        <i class="fab fa-facebook"></i>
       </div>
-
-      <div class="input-group">
-        <svg class="input-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 10v6a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-6" stroke="#4A69E2" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="4" width="8" height="6" rx="2" stroke="#4A69E2" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <input id="password" type="password" placeholder="" required />
-        <label for="password">Kata Sandi</label>
-      </div>
-
-      <div class="recover"><a href="#">Lupa kata sandi?</a></div>
-
-      <button type="submit" class="btn">Masuk</button>
-
-      <div class="or">atau</div>
-
-      <div class="icons" aria-hidden="true">
-        <button aria-label="Sign in with Google">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21.6 12.2c0-.68-.06-1.33-.18-1.96H12v3.7h5.6c-.24 1.3-.97 2.4-2.06 3.14v2.6h3.33c1.95-1.8 3.07-4.45 3.07-7.48z" fill="#4285F4"/><path d="M12 22c2.7 0 4.98-.9 6.64-2.44l-3.33-2.6c-.93.63-2.12.99-3.31.99-2.54 0-4.69-1.71-5.46-4.02H2.93v2.52C4.6 19.7 8.07 22 12 22z" fill="#34A853"/><path d="M6.54 13.93A6.994 6.994 0 0 1 6 12c0-.66.1-1.3.29-1.91V7.57H2.93A10.96 10.96 0 0 0 1 12c0 1.72.41 3.33 1.14 4.76l4.4-2.83z" fill="#FBBC05"/><path d="M12 6.48c1.47 0 2.8.5 3.83 1.48l2.86-2.86C16.98 3.54 14.7 2.5 12 2.5 8.07 2.5 4.6 4.8 2.93 7.98l4.4 2.52C7.31 8.19 9.46 6.48 12 6.48z" fill="#EA4335"/></svg>
-        </button>
-        <button aria-label="Sign in with Facebook">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07C2 17.1 5.66 21.2 10.44 22v-7.03H8.08v-2.9h2.36V9.68c0-2.33 1.39-3.61 3.5-3.61.99 0 2.03.18 2.03.18v2.23h-1.14c-1.12 0-1.46.69-1.46 1.4v1.69h2.5l-.4 2.9h-2.1V22C18.34 21.2 22 17.1 22 12.07z" fill="#4267B2"/></svg>
-        </button>
-      </div>
-
       <div class="links">
-        <div>Belum punya akun?</div>
-        <button type="button" id="signUpButton">Daftar</button>
+        <p>Already Have Account ?</p>
+        <button id="signInButton">Sign In</button>
       </div>
+    </div>
 
-      <div class="note">Dengan masuk, Anda menyetujui syarat & ketentuan kami.</div>
+  <div class="container" id="signIn">
+        <h1 class="form-title">Sign In</h1>
+        <form method="post" action="">
+          <div id="signInMessage" class="messageDiv" style="display:none;"></div>
 
-    </form>
-  </section>
-
-  <script>
-    // Floating label polyfill: handle when browser autofill or content exists
-    document.querySelectorAll('.input-group input').forEach(function(inp){
-      function toggle(){
-        if(inp.value.trim() !== '') inp.nextElementSibling.style.transform = 'translateY(-18px) scale(0.93)';
-        else inp.nextElementSibling.style.transform = 'translateY(0) scale(1)';
-      }
-      inp.addEventListener('input', toggle);
-      window.addEventListener('load', toggle);
-    });
-
-    // Simple demo: clicking Daftar toggles text (replace with modal/navigation as needed)
-    document.getElementById('signUpButton').addEventListener('click', function(){
-      alert('Fitur Daftar belum diaktifkan — ini contoh interaksi.');
-    });
-  </script>
+          <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email"  id="email" placeholder="Email" required>
+              <label for="email">Email</label>
+          </div>
+          <div class="input-group">
+              <i class="fas fa-lock"></i>
+            <input type="password" id="password"  placeholder="Password" required>
+              <label for="password">Password</label>
+          </div>
+          <p class="recover">
+            <a href="#">Recover Password</a>
+          </p>
+         <button  class="btn"  id="submitSignIn">Sign In</button>
+        </form>
+        <p class="or">
+          ----------or--------
+        </p>
+        <div class="icons">
+          <i class="fab fa-google"></i>
+          <i class="fab fa-facebook"></i>
+        </div>
+        <div class="links">
+          <p>Don't have account yet?</p>
+          <button id="signUpButton">Sign Up</button>
+        </div>
+      </div>
+      <script src="script.js"></script>
 </body>
 </html>
