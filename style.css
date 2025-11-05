@@ -1,242 +1,186 @@
-/* Reset dan Pengaturan Font Global */
+/* Styling untuk laman login — format: CSS */
+
+/* Reset dan Font Global */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
 }
+html, body { height: 100%; }
 
-/* Latar Belakang Body yang Lebih Halus */
+/* Latar Belakang yang Dinamis (Gradien) */
 body{
-    /* * PERUBAHAN UTAMA ADA DI SINI:
-     * 1. Layer pertama adalah gradien lama Anda, tapi dibuat semi-transparan
-     * (menggunakan rgba dengan nilai '0.85' untuk transparansi).
-     * 2. Layer kedua adalah URL gambar pemandangan alam.
-     */
-    background: linear-gradient(135deg, rgba(245, 247, 250, 0.85), rgba(195, 207, 226, 0.85)),
-                url('https://source.unsplash.com/1600x900/?nature,landscape,mountain');
-    
-    /* Properti ini memastikan gambar latar menutupi layar dengan baik */
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Membuat background diam saat di-scroll */
-
-    /* Properti ini sudah ada dari sebelumnya (penting untuk layout) */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px 0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: linear-gradient(160deg,#e9f0ff 0%, #f7fbff 35%, #eaf7f0 100%);
+  overflow:hidden;
+  padding:40px 20px;
 }
 
-/* Kontainer Form yang Ditingkatkan */
+/* Container scenery (jika SVG di-html) */
+.scenery{
+  position:fixed;
+  inset:0; /* cover all */
+  z-index:0;
+  pointer-events:none;
+}
+
+/* Soft overlay to keep contrast */
+.bg-overlay{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.55));
+  backdrop-filter: blur(2px);
+  z-index:0;
+  pointer-events:none;
+}
+
+/* Glass card (login) */
 .container{
-    background:#fff;
-    width: 450px;
-    max-width: 95%; /* Responsif di layar kecil */
-    padding: 2.5rem; /* Ruang bernapas lebih banyak */
-    margin: 20px auto;
-    border-radius: 10px;
-    /* Bayangan yang lebih lembut dan profesional */
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); 
+  position:relative;
+  width:450px;
+  max-width:96%;
+  z-index:2;
+  background: rgba(255,255,255,0.75);
+  border-radius:14px;
+  padding:2.25rem;
+  box-shadow: 0 12px 40px rgba(20,30,60,0.12);
+  border: 1px solid rgba(255,255,255,0.6);
+  backdrop-filter: blur(8px);
+  overflow:hidden;
 }
 
-form{
-    margin: 0; /* Padding container sudah cukup */
-}
+form{ margin:0; }
 
-/* Judul Form yang Lebih Tegas */
-.form-title{
-    font-size: 1.75rem;
-    font-weight: 600;
-    text-align:center;
-    padding-bottom: 1rem;
-    margin-bottom: 1.5rem;
-    color: #333;
-    position: relative;
-}
+.form-title{ font-size:1.6rem; font-weight:700; color:#21304b; text-align:center; margin-bottom:1rem; }
+.form-sub{ font-size:0.95rem; color:#51627a; text-align:center; margin-bottom:1.25rem; }
 
-/* Garis Bawah Aksen Opsional untuk Judul */
-.form-title::after {
-    content: '';
-    width: 50px;
-    height: 4px;
-    border-radius: 2px;
-    background-color: #4A69E2; /* Warna Aksen */
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* Input Form yang Ditingkatkan */
+/* Input groups */
+.input-group{ position:relative; margin-bottom:1.25rem; }
 input{
-    color: #555;
-    width:100%;
-    background-color:transparent;
-    border:none;
-    border-bottom: 1px solid #ddd; /* Border lebih halus */
-    padding-left: 2.5rem; /* Ruang untuk ikon */
-    font-size: 16px;
-    height: 45px; /* Tinggi eksplisit */
-    transition: border-color 0.3s ease;
+  width:100%;
+  padding:14px 14px 14px 46px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(245,249,255,0.8));
+  font-size:15px;
+  color:#21304b;
+  box-shadow:0 6px 18px rgba(34,50,90,0.05);
+  height:48px;
 }
-.input-group{
-    padding: 0;
-    margin-bottom: 1.5rem; /* Jarak antar grup */
-    position:relative;
-}
-.input-group i{
-    position:absolute;
-    color: #999; /* Warna ikon lebih lembut */
-    left: 5px;
-    top: 14px; /* Posisi ikon vertikal */
-    transition: color 0.3s ease;
-}
+input::placeholder{ color:#9aa6bb; }
+.input-icon{ position:absolute; left:12px; top:50%; transform:translateY(-50%); width:26px; height:26px; opacity:0.95; }
 
-/* Efek Fokus */
-input:focus{
-    background-color: transparent;
-    outline:transparent;
-    border-bottom: 2px solid #4A69E2; /* Aksen saat fokus */
-}
-input::placeholder{
-    color:transparent;
-}
+/* Focus style */
+input:focus{ outline:none; box-shadow:0 8px 20px rgba(74,105,226,0.12); transform:translateY(-1px); }
 
-/* Label Floating yang Disempurnakan */
+/* Floating label behavior (compatible with label placed after input) */
 label{
-    color:#999;
-    position:absolute;
-    left: 2.5rem; /* Sejajar dengan padding input */
-    top: 12px;
-    cursor:text;
-    transition:0.3s ease all;
-    pointer-events: none; /* Biarkan klik tembus ke input */
+  color:#7b8899;
+  position:absolute;
+  left:46px;
+  top:14px;
+  cursor:text;
+  transition:0.22s ease all;
+  pointer-events:none;
+  font-size:15px;
 }
 
-input:focus~label, input:not(:placeholder-shown)~label{
-    top: -20px; /* Posisi 'terangkat' */
-    left: 5px; /* Sejajar dengan ikon */
-    color: #4A69E2; /* Warna aksen saat 'terangkat' */
-    font-size: 14px;
-    font-weight: 500;
+/* When input has value or focus, push label up */
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label{
+  top:-18px;
+  left:12px;
+  color:#3356d1;
+  font-size:13px;
+  font-weight:600;
 }
 
-/* Ganti warna ikon saat input fokus */
-input:focus ~ i {
-    color: #4A69E2;
-}
+/* Recover */
+.recover{ font-size:0.9rem; text-align:right; color:#3356d1; margin-bottom:0.75rem; }
+.recover a{ color:inherit; text-decoration:none; }
+.recover a:hover{ text-decoration:underline; }
 
-/* Tautan 'Recover Password' */
-.recover{
-    text-align:right;
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-}
-.recover a{
-    text-decoration:none;
-    color: #4A69E2; /* Warna aksen */
-}
-.recover a:hover{
-    color: #3b55b6; /* Lebih gelap saat hover */
-    text-decoration:underline;
-}
-
-/* Tombol Aksi Utama (Sign In / Sign Up) */
+/* Button */
 .btn{
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 12px 0;
-    border-radius: 8px; /* Sudut lebih bulat */
-    outline:none;
-    border:none;
-    width:100%;
-    background: #4A69E2; /* Warna aksen profesional */
-    color:white;
-    cursor:pointer;
-    transition: all 0.3s ease;
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  background:linear-gradient(90deg,#4A69E2,#2E5BD8);
+  color:#fff;
+  font-weight:600;
+  font-size:1rem;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(46,91,216,0.16);
+  transition: transform .18s ease, box-shadow .18s ease;
 }
-.btn:hover{
-    background: #3b55b6; /* Lebih gelap saat hover */
-    /* Efek 'glow' halus saat hover */
-    box-shadow: 0 5px 15px rgba(74, 105, 226, 0.3);
-    transform: translateY(-2px); /* Efek terangkat */
+.btn:hover{ transform:translateY(-3px); box-shadow:0 18px 36px rgba(46,91,216,0.18); }
+
+.or{ margin:14px 0; color:#8f9cb0; text-align:center; font-weight:600; }
+
+/* Social icons */
+.icons{ text-align:center; margin-bottom:.6rem; }
+.icons button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:none;
+  background:transparent;
+  margin:0 8px;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(34,50,90,0.04);
 }
-.btn:active {
-    transform: translateY(0); /* Efek klik */
+.icons svg{ width:18px; height:18px; }
+
+.links{ display:flex; justify-content:center; gap:10px; margin-top:12px; font-size:0.95rem; color:#21304b; }
+.links button{ background:transparent; border:none; color:#3356d1; font-weight:600; cursor:pointer; }
+
+.note{ font-size:0.85rem; color:#7b8899; text-align:center; margin-top:10px; }
+
+/* Responsive */
+@media (max-width:420px){
+  .container{ padding:1.25rem; }
+  .form-title{ font-size:1.35rem; }
 }
 
-/* Pemisah 'or' */
-.or{
-    font-size: 0.9rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
-    text-align:center;
-    color: #aaa;
-}
+/* ----------------- Animated elements (CSS keyframes) ----------------- */
 
-/* Ikon Sosial */
-.icons{
-    text-align:center;
-    margin-bottom: 1.5rem;
-}
-.icons i{
-    color: #4A69E2;
-    padding: 0.8rem;
-    width: 45px; /* Ukuran eksplisit */
-    height: 45px; /* Ukuran eksplisit */
-    border-radius: 50%; /* Ikon bulat */
-    font-size: 1.5rem;
-    cursor:pointer;
-    border: 2px solid #eef2f7; /* Border sangat halus */
-    margin: 0 10px;
-    transition: all 0.3s ease;
-    display: inline-flex; /* Untuk menengahkan ikon */
-    justify-content: center;
-    align-items: center;
-}
-.icons i:hover{
-    background: #4A69E2; /* Latar penuh saat hover */
-    color: #fff; /* Ikon putih */
-    border-color: #4A69E2;
-    transform: scale(1.1); /* Efek 'pop' */
-}
+/* Cloud movement */
+@keyframes cloudMove{ from{ transform:translateX(-10%); } to{ transform:translateX(110%); } }
+.cloud{ animation:cloudMove linear infinite; }
+.cloud.slow{ animation-duration:60s; }
+.cloud.med{ animation-duration:45s; }
+.cloud.fast{ animation-duration:30s; }
 
-/* Tautan Pindah Form (Sign Up / Sign In) */
-.links{
-    display:flex;
-    justify-content:center;
-    gap: 10px; /* Jarak antar elemen */
-    padding:0;
-    margin-top:0.9rem;
-    font-weight: 500;
-    font-size: 0.95rem;
-    color: #555;
-}
- #signUpButton, #signInButton{
-    color: #4A69E2;
-    border:none;
-    background-color:transparent;
-    font-size: 0.95rem;
-    font-weight: 600; /* Teks tebal agar terlihat jelas */
-    cursor: pointer;
-}
-#signUpButton:hover, #signInButton:hover {
-    text-decoration:underline;
-    color: #3b55b6;
-} 
+/* Sun gentle bob */
+@keyframes bob{ 0%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } 100%{ transform:translateY(0); } }
+.sun{ animation:bob 6s ease-in-out infinite; }
 
-/* Pesan Error yang Didesain Ulang */
-.messageDiv{
-    background-color: #ffebee; /* Latar merah muda */
-    color: #E94B3C; /* Teks merah tua */
-    padding: 12px 20px;
-    margin-bottom: 1.5rem;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    border: 1px solid #f0c0c0; /* Border merah muda */
-    opacity:0;
-    animation:fadeOut 7s forwards;
-}
+/* Parallax for mountains */
+@keyframes floatX{ 0%{ transform:translateX(0); } 50%{ transform:translateX(-6px); } 100%{ transform:translateX(0); } }
+.mountain.near{ animation:floatX 8s ease-in-out infinite; }
+.mountain.far{ animation:floatX 14s ease-in-out infinite; }
+
+/* subtle shimmer for water */
+@keyframes shimmer{ 0%{ opacity:.85 } 50%{ opacity:1 } 100%{ opacity:.85 } }
+.lake{ animation:shimmer 5s ease-in-out infinite; }
+
+/* Utility classes for accessibility/interaction */
+.visually-hidden{ position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px, 1px, 1px, 1px); white-space:nowrap; }
+
+/* If you want to use an external image (instead of inline SVG), example helper:
+   .bg-image {
+     position:fixed; inset:0; background-image: url("path/to/image.jpg");
+     background-size: cover; background-position:center; z-index:0; filter: blur(1px) brightness(.95);
+   }
+*/
+
+/* End of CSS */
