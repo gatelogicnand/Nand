@@ -1,148 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Reset dan Pengaturan Font Global */
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:"poppins",sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
+
+/* Latar Belakang Body yang Lebih Halus */
 body{
-    background-color: #c9d6ff;
-    background:linear-gradient(to right,#e2e2e2,#c9d6ff);
+    /* Gradien baru yang lebih profesional */
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px 0; /* Tambahkan padding untuk tampilan mobile */
 }
+
+/* Kontainer Form yang Ditingkatkan */
 .container{
     background:#fff;
-    width:450px;
-    padding:1.5rem;
-    margin:50px auto;
-    border-radius:10px;
-    box-shadow:0 20px 35px rgba(0,0,1,0.9);
+    width: 450px;
+    max-width: 95%; /* Responsif di layar kecil */
+    padding: 2.5rem; /* Ruang bernapas lebih banyak */
+    margin: 20px auto;
+    border-radius: 10px;
+    /* Bayangan yang lebih lembut dan profesional */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); 
 }
+
 form{
-    margin:0 2rem;
+    margin: 0; /* Padding container sudah cukup */
 }
+
+/* Judul Form yang Lebih Tegas */
 .form-title{
-    font-size:1.5rem;
-    font-weight:bold;
+    font-size: 1.75rem;
+    font-weight: 600;
     text-align:center;
-    padding:1.3rem;
-    margin-bottom:0.4rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    position: relative;
 }
+
+/* Garis Bawah Aksen Opsional untuk Judul */
+.form-title::after {
+    content: '';
+    width: 50px;
+    height: 4px;
+    border-radius: 2px;
+    background-color: #4A69E2; /* Warna Aksen */
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Input Form yang Ditingkatkan */
 input{
-    color:inherit;
+    color: #555;
     width:100%;
     background-color:transparent;
     border:none;
-    border-bottom:1px solid #757575;
-    padding-left:1.5rem;
-    font-size:15px;
+    border-bottom: 1px solid #ddd; /* Border lebih halus */
+    padding-left: 2.5rem; /* Ruang untuk ikon */
+    font-size: 16px;
+    height: 45px; /* Tinggi eksplisit */
+    transition: border-color 0.3s ease;
 }
 .input-group{
-    padding:1% 0;
+    padding: 0;
+    margin-bottom: 1.5rem; /* Jarak antar grup */
     position:relative;
-
 }
 .input-group i{
     position:absolute;
-    color:black;
+    color: #999; /* Warna ikon lebih lembut */
+    left: 5px;
+    top: 14px; /* Posisi ikon vertikal */
+    transition: color 0.3s ease;
 }
+
+/* Efek Fokus */
 input:focus{
     background-color: transparent;
     outline:transparent;
-    border-bottom:2px solid hsl(327,90%,28%);
+    border-bottom: 2px solid #4A69E2; /* Aksen saat fokus */
 }
 input::placeholder{
     color:transparent;
 }
+
+/* Label Floating yang Disempurnakan */
 label{
-    color:#757575;
-    position:relative;
-    left:1.2em;
-    top:-1.3em;
-    cursor:auto;
+    color:#999;
+    position:absolute;
+    left: 2.5rem; /* Sejajar dengan padding input */
+    top: 12px;
+    cursor:text;
     transition:0.3s ease all;
+    pointer-events: none; /* Biarkan klik tembus ke input */
 }
-input:focus~label,input:not(:placeholder-shown)~label{
-    top:-3em;
-    color:hsl(327,90%,28%);
-    font-size:15px;
+
+input:focus~label, input:not(:placeholder-shown)~label{
+    top: -20px; /* Posisi 'terangkat' */
+    left: 5px; /* Sejajar dengan ikon */
+    color: #4A69E2; /* Warna aksen saat 'terangkat' */
+    font-size: 14px;
+    font-weight: 500;
 }
+
+/* Ganti warna ikon saat input fokus */
+input:focus ~ i {
+    color: #4A69E2;
+}
+
+/* Tautan 'Recover Password' */
 .recover{
     text-align:right;
-    font-size:1rem;
-    margin-bottom:1rem;
-
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
 }
 .recover a{
     text-decoration:none;
-    color:rgb(125,125,235);
+    color: #4A69E2; /* Warna aksen */
 }
 .recover a:hover{
-    color:blue;
+    color: #3b55b6; /* Lebih gelap saat hover */
     text-decoration:underline;
 }
-button{
-    font-size:1.1rem;
-    padding:8px 0;
-    border-radius:5px;
+
+/* Tombol Aksi Utama (Sign In / Sign Up) */
+.btn{
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 12px 0;
+    border-radius: 8px; /* Sudut lebih bulat */
     outline:none;
     border:none;
     width:100%;
-    background:rgb(125,125,235);
+    background: #4A69E2; /* Warna aksen profesional */
     color:white;
     cursor:pointer;
-    transition:0.9s;
+    transition: all 0.3s ease;
 }
-button:hover{
-    background:#07001f;
+.btn:hover{
+    background: #3b55b6; /* Lebih gelap saat hover */
+    /* Efek 'glow' halus saat hover */
+    box-shadow: 0 5px 15px rgba(74, 105, 226, 0.3);
+    transform: translateY(-2px); /* Efek terangkat */
 }
+.btn:active {
+    transform: translateY(0); /* Efek klik */
+}
+
+/* Pemisah 'or' */
 .or{
-    font-size:1.1rem;
-    margin-top:0.5rem;
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
     text-align:center;
+    color: #aaa;
 }
+
+/* Ikon Sosial */
 .icons{
     text-align:center;
+    margin-bottom: 1.5rem;
 }
 .icons i{
-    color:rgb(125,125,235);
-    padding:0.8rem 1.5rem;
-    border-radius:10px;
-    font-size:1.5rem;
+    color: #4A69E2;
+    padding: 0.8rem;
+    width: 45px; /* Ukuran eksplisit */
+    height: 45px; /* Ukuran eksplisit */
+    border-radius: 50%; /* Ikon bulat */
+    font-size: 1.5rem;
     cursor:pointer;
-    border:2px solid #dfe9f5;
-    margin:0 15px;
-    transition:1s;
+    border: 2px solid #eef2f7; /* Border sangat halus */
+    margin: 0 10px;
+    transition: all 0.3s ease;
+    display: inline-flex; /* Untuk menengahkan ikon */
+    justify-content: center;
+    align-items: center;
 }
 .icons i:hover{
-    background:#07001f;
-    font-size:1.6rem;
-    border:2px solid rgb(125,125,235);
+    background: #4A69E2; /* Latar penuh saat hover */
+    color: #fff; /* Ikon putih */
+    border-color: #4A69E2;
+    transform: scale(1.1); /* Efek 'pop' */
 }
+
+/* Tautan Pindah Form (Sign Up / Sign In) */
 .links{
     display:flex;
-    justify-content:space-around;
-    padding:0 4rem;
+    justify-content:center;
+    gap: 10px; /* Jarak antar elemen */
+    padding:0;
     margin-top:0.9rem;
-    font-weight:bold;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #555;
 }
  #signUpButton, #signInButton{
-    color:rgb(125,125,235);
+    color: #4A69E2;
     border:none;
     background-color:transparent;
-    font-size:1rem;
-    font-weight:bold;
+    font-size: 0.95rem;
+    font-weight: 600; /* Teks tebal agar terlihat jelas */
+    cursor: pointer;
 }
 #signUpButton:hover, #signInButton:hover {
     text-decoration:underline;
-    color:blue;
+    color: #3b55b6;
 } 
+
+/* Pesan Error yang Didesain Ulang */
 .messageDiv{
-    background-color:hsl(327,90%,28%);
-    color:white;
-    padding:10px 20px;
-    margin:10px;
-    border-radius: 5px;
-    font-size:1rem;
+    background-color: #ffebee; /* Latar merah muda */
+    color: #E94B3C; /* Teks merah tua */
+    padding: 12px 20px;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    border: 1px solid #f0c0c0; /* Border merah muda */
     opacity:0;
     animation:fadeOut 7s forwards;
-
 }
